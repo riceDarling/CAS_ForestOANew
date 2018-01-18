@@ -1,0 +1,179 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+		<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
+		<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css" />
+		<link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin" />
+		<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css" />
+		<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+		<title>赤峰市森林公安局网上办公系统</title>
+	</head>
+
+	<body>
+		<!--<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 账号权限管理 <span class="c-gray en">&gt;</span> 权限管理
+			<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+		</nav>-->
+		<div class="page-container">
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l">
+				<a href="javascript:;" onclick="product_add('添加权限节点','System-power-add.html')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加权限节点</a>
+				</span>
+			</div>
+			<table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+				<thead>
+					<tr class="text-c">
+						<th width="40">ID</th>
+						<th width="200">名称</th>
+						<th width="200">权限</th>
+						<th width="100">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="text-c">
+						<td>1</td>
+						<td>xxx局长</td>
+						<td>公文办理、简报办理</td>
+						<td>
+							<a title="编辑" href="javascript:;" onclick="product_edit('编辑','System-power-edit.html','310')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+							<a title="删除" href="javascript:;" onclick="product_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+							<!--<a style="text-decoration:none" class="ml-5" onClick="product_edit('编辑','region-manage-power.html','10001')" href="javascript:;" title="分配权限"><span class="label label-success radius">分配权限</span></a>-->
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+		<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
+		<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
+
+		<!--请在下方写此页面业务相关的脚本-->
+		<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+		<script type="text/javascript">
+			$('.table-sort').dataTable({
+				"ajax": {
+					url: "http://192.168.0.154:8080/forestoa/role/findByPage",
+					dataSrc: function(result) {
+						//这里result和上面jquery的ajax的代码类似，也是可以得到data.json的数据，但是这样的格式，Datatables不能直接使用，这时候需要在这里处理一下
+						//直接返回Datatables需要的那部分数据即可，看到这里，大家或许又懂了些什么看到了他的强大和灵活
+						return result.data.list;
+					}
+				},
+				"columns": [{
+						"data": "rId"
+					},
+					{
+						"data": "rName"
+					},
+					{
+						"data": "menus",
+						//渲染
+						"render": function(data, type, row, meta) {
+							//type 的值  dispaly sort filter
+							//代表，是显示类型的时候判断值的长度是否超过8，如果是则截取
+							//这里只处理了类型是显示的，过滤和排序返回原始数据
+							var html = '';
+							if(data.length > 0) {
+								for(var i = 0; i < data.length; i++) {
+									html += data[i].mName + '&nbsp;&nbsp;';
+								}
+							}
+							return html;
+						}
+					},
+					{
+						"data": "rId",
+						//渲染
+						"render": function(data, type, row, meta) {
+							var html = '';
+							html += '<a title="编辑" href="javascript:;" onclick="product_edit(\'编辑\',\'system-category-add.html\',\'1\',\'\',' + data + ')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>'
+							html += '<a title="删除" href="javascript:;" onclick="product_del(this,' + data + ')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>';
+							return html;
+						}
+					},
+				],
+
+				"aaSorting": [
+					[1, "desc"]
+				], //默认第几个排序
+				"bStateSave": true, //状态保存
+				"pading": false,
+				"searching": false,
+				"aoColumnDefs": [
+					//{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+					{
+						"orderable": false,
+						"aTargets": [1, 3]
+					} // 不参与排序的列
+				]
+			});
+
+			/*查看*/
+			function product_show(title, url, id) {
+				var index = layer.open({
+					type: 2,
+					title: title,
+					content: url
+				});
+				layer.full(index);
+			}
+			/*添加*/
+			function product_add(title, url) {
+				var index = layer.open({
+					type: 2,
+					title: title,
+					content: url
+				});
+				layer.full(index);
+			};
+			/*修改*/
+			function product_edit(title, url, id) {
+				var index = layer.open({
+					type: 2,
+					title: title,
+					content: url,
+					success: function(layero, index) {
+						//打开新的页面之后，把当前要编辑的角色对象传到layui-layer-title的自定义属性rId中，方便编辑页面使用
+						$(".layui-layer-title").attr("rId",id);
+					}
+				});
+				layer.full(index);
+			};
+			/*删除、撤销*/
+			function product_del(obj, id) {
+				layer.confirm('确认要撤销吗？', function(index) {
+					$.ajax({
+						type: 'POST',
+						url: '',
+						dataType: 'json',
+						success: function(data) {
+							$(obj).parents("tr").remove();
+							layer.msg('已撤销!', {
+								icon: 1,
+								time: 1000
+							});
+						},
+						error: function(data) {
+							console.log(data.msg);
+						},
+					});
+				});
+			};
+		</script>
+	</body>
+
+</html>

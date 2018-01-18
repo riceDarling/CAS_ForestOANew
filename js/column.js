@@ -85,14 +85,17 @@ var linkjump = {
 	
 	"公文管理":'documents-manager.html',
 	"公文搜索":'documents-search.html',
-	"权限管理":'admin-permission.html',
-	"组织管理":'region-manage.html',
-	"人员管理":'personnel-manage.html',
-	"统计查询":'statistics-document.html',
+	"我的任务":'Work-myTask.html',
+	
+	"权限管理":'System-power.html',
+	"组织管理":'System-organization.html',
+	"人员管理":'System-personnel.html',
+	"统计查询":'Statistics-searchInfo.html',
+	
 	"值班表":'statistics-workingshift.html',
 	"考核表":'statistics-check.html',
-	"工作计划":'statistics-workplan.html',
-	"通知通告":'statistics-notice.html',
+	"工作计划":'Work-plan.html',
+	"通知通告":'Work-bulletin.html',
 	"收发单位管理":'unit-file-management.html',
 	
 }
