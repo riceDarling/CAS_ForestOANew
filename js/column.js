@@ -55,38 +55,12 @@ $('#tjwqBtn .listbtnz').click(function() {
 	}
 });
 var linkjump = {
-	"公文-发文管理_拟稿": "File-document-send.html",
-	"公文-发文管理_核稿": "File-document-send.html",
-	"公文-发文管理_审核": "File-document-send.html",
-	"公文-发文管理_签批": "File-document-send.html",
-	"公文-发文管理_校核": "File-document-send.html",
-	"公文-发文管理_盖章": "File-document-send.html",
-	"公文-发文管理_发文": "File-document-send.html",
-
-	"公文-收文管理_收文登记": "documentsInFile.html",
-	"公文-收文管理_领导批阅": "documentsInFileHandle.html",
-	"公文-收文管理_收文传阅": "documentsInFileHandle.html",
-	"公文-收文管理_收文承办": "documentsInFileHandle.html",
-	"公文-收文管理_收文归档": "documentsInFileHandle.html",
-
-	"简报-发文管理_拟稿": "briefingSendFile.html",
-	"简报-发文管理_核稿": "briefingSendFileHandle.html",
-	"简报-发文管理_审核": "briefingSendFileHandle.html",
-	"简报-发文管理_签批": "briefingSendFileHandle.html",
-	"简报-发文管理_校核": "briefingSendFileHandle.html",
-	"简报-发文管理_盖章": "briefingSendFileHandle.html",
-	"简报-发文管理_发文": "briefingSendFileHandle.html",
-
-	"简报-收文管理_收文登记": "briefingInFile.html",
-	"简报-收文管理_领导批阅": "briefingInFileHandle.html",
-	"简报-收文管理_收文传阅": "briefingInFileHandle.html",
-	"简报-收文管理_收文承办": "briefingInFileHandle.html",
-	"简报-收文管理_收文归档": "briefingInFileHandle.html",
-
+	"公文办理":'File-document-handle.html',
+	"简报办理":'File-briefing-handle.html',	
 	"公文管理": 'File-document-manager.html',
 	"公文搜索": 'File-document-search.html',
 	"我的任务": 'Work-myTask.html',
-
+	
 	"权限管理": 'System-power.html',
 	"组织管理": 'System-organization.html',
 	"人员管理": 'System-personnel.html',

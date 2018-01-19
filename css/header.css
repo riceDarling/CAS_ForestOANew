@@ -15,7 +15,6 @@ body {
 	background: #f4f4f4;
 }
 
-
 body,
 p,
 h1,
@@ -301,4 +300,9 @@ em {
 
 .county:hover {
 	color: red;
+}
+
+.dislpayArrow {
+	left: 200px;
+	z-index: 99999;
 }
