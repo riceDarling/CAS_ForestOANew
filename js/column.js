@@ -55,13 +55,13 @@ $('#tjwqBtn .listbtnz').click(function() {
 	}
 });
 var linkjump = {
-	"公文-发文管理_拟稿": "documentsSendFile.html",
-	"公文-发文管理_核稿": "documentsSendFileHandle.html",
-	"公文-发文管理_审核": "documentsSendFileHandle.html",
-	"公文-发文管理_签批": "documentsSendFileHandle.html",
-	"公文-发文管理_校核": "documentsSendFileHandle.html",
-	"公文-发文管理_盖章": "documentsSendFileHandle.html",
-	"公文-发文管理_发文": "documentsSendFileHandle.html",
+	"公文-发文管理_拟稿": "File-document-send.html",
+	"公文-发文管理_核稿": "File-document-send.html",
+	"公文-发文管理_审核": "File-document-send.html",
+	"公文-发文管理_签批": "File-document-send.html",
+	"公文-发文管理_校核": "File-document-send.html",
+	"公文-发文管理_盖章": "File-document-send.html",
+	"公文-发文管理_发文": "File-document-send.html",
 	
 	"公文-收文管理_收文登记": "documentsInFile.html",
 	"公文-收文管理_领导批阅": "documentsInFileHandle.html",
@@ -83,8 +83,8 @@ var linkjump = {
 	"简报-收文管理_收文承办": "briefingInFileHandle.html",
 	"简报-收文管理_收文归档": "briefingInFileHandle.html",
 	
-	"公文管理":'documents-manager.html',
-	"公文搜索":'documents-search.html',
+	"公文管理":'File-document-manager.html',
+	"公文搜索":'File-document-search.html',
 	"我的任务":'Work-myTask.html',
 	
 	"权限管理":'System-power.html',
