@@ -55,6 +55,13 @@
 						</a>
 					</li>
 					<li>
+						<a href="Work-task.html" title="我的任务">
+							<div class="target-button">
+								<img src="images/index/16.png" width="70px" height="70px" />
+							</div>
+						</a>
+					</li>
+					<li>
 						<a href="File-handle.html" title="公文办理">
 							<div class="target-button">
 								<img src="images/index/8.png" width="70px" height="70px" />
@@ -71,7 +78,7 @@
 					<li>
 						<a href="SearchInfo.html" title="统计查询">
 							<div class="target-button">
-								<img src="images/index/4.png" width="70px" height="70px" />
+								<img src="images/index/7.png" width="70px" height="70px" />
 							</div>
 						</a>
 					</li>
@@ -85,54 +92,68 @@
 					<li>
 						<a href="Work-program.html" title="工作计划">
 							<div class="target-button">
-								<img src="images/index/5.png" width="70px" height="70px" />
+								<img src="images/index/10.png" width="70px" height="70px" />
 							</div>
 						</a>
 					</li>
 					<li>
-						<a href="JavaScript:;" title="档案管理">
+						<a href="javascript:void(0);" title="档案管理">
 							<div class="target-button">
 								<img src="images/index/15.png" width="70px" height="70px" />
 							</div>
 						</a>
 					</li>
 					<li>
-						<a href="JavaScript:;" title="通知通告">
+						<a href="javascript:void(0);" title="通知通告">
 							<div class="target-button">
 								<img src="images/index/11.png" width="70px" height="70px" />
 							</div>
 						</a>
 					</li>
 					<li>
-						<a href="JavaScript:;" title="工作日志">
+						<a href="javascript:void(0);" title="公文管理">
+							<div class="target-button">
+								<img src="images/index/15.png" width="70px" height="70px" />
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);" title="公文搜索">
+							<div class="target-button">
+								<img src="images/index/4.png" width="70px" height="70px" />
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);" title="工作日志">
 							<div class="target-button">
 								<img src="images/index/17.png" width="70px" height="70px" />
 							</div>
 						</a>
 					</li>
 					<li>
-						<a href="JavaScript:;" title="办公用品">
+						<a href="javascript:void(0);" title="办公用品">
 							<div class="target-button">
 								<img src="images/index/6.png" width="70px" height="70px" />
 							</div>
 						</a>
 					</li>
 					<li>
-						<a href="JavaScript:;" title="通讯录">
+						<a href="javascript:void(0);" title="通讯录">
 							<div class="target-button">
 								<img src="images/index/5.png" width="70px" height="70px" />
 							</div>
 						</a>
 					</li>
 					<li>
-						<a href="JavaScript:;" title="设备管理">
+						<a href="javascript:void(0);" title="设备管理">
 							<div class="target-button">
 								<img src="images/index/3.png" width="70px" height="70px" />
 							</div>
 						</a>
 					</li>
 					<li>
-						<a href="JavaScript:;" title="车辆管理">
+						<a href="javascript:void(0);" title="车辆管理">
 							<div class="target-button">
 								<img src="images/index/2.png" width="70px" height="70px" />
 							</div>
@@ -154,10 +175,6 @@
 				<div class="tjwqtitle">
 					公文办理
 				</div>
-				<!--<div class="listbtnz">
-					<b></b>
-					<div framehref>我的任务</div>
-				</div>-->
 				<div class="listbtnz">
 					<b></b>
 					<div>公文-发文管理</div>
@@ -274,26 +291,25 @@
 						<div>收文归档</div>
 					</div>
 				</div>
-				<div class="listbtnz">
+				<!--<div class="listbtnz">
 					<b></b>
 					<div framehref>公文管理</div>
 				</div>
 				<div class="listbtnz">
 					<b></b>
 					<div framehref>公文搜索</div>
-				</div>
-				
+				</div>-->
 			</div>
 			<div id="tjwqMainframe">
 				<div id="tjwqMainframe_bodybox">
 					<div id="tjwqMainframe_body">
-						<iframe name="mainFrame" id="mainFrame" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" src="Work-myTask.html"></iframe>
+						<iframe name="mainFrame" id="mainFrame" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" src="welcome.html"></iframe>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="dislpayArrow hidden-xs">
-			<a class="pngfix" href="javascript:void(0);" onclick="displaynavbar(this)"></a>
+			<a class="pngfix" href="javascript:void(0);" onclick="fnDisplayNavBar(this)"></a>
 		</div>
 		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
@@ -311,34 +327,6 @@
 		<script type="text/javascript" src="lib/ueditor/1.4.3/ueditor.all.min.js"></script>
 		<script type="text/javascript" src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 		<script type="text/javascript" src="js/column.js"></script>
-
-		<script>
-			/*左侧菜单列表收缩、展开*/
-			function displaynavbar(obj) {
-				if($(obj).hasClass("open")) {
-					$(obj).removeClass("open");
-					$("body").removeClass("big-page");
-					$('#tjwqBtn').show();
-					$('#tjwqMainframe').css('width', '85%')
-				} else {
-					$(obj).addClass("open");
-					$("body").addClass("big-page");
-					$('#tjwqBtn').hide();
-					$('#tjwqMainframe').css('width', '100%')
-				}
-			};
-			/*监听窗口大小、设置右侧容器宽度*/
-			function resizeWindow() {
-				var hw = $(window).width();
-				var lWrap = $('#tjwqBtn').width();
-				$('#tjwqMainframe').css('width', (hw - lWrap - 1));
-			};
-			resizeWindow();
-			/*实时监听窗口改变*/
-			$(window).resize(function() {
-				resizeWindow();
-			});
-		</script>
 	</body>
 
 </html>

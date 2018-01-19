@@ -2,10 +2,10 @@ var tjwqTitleVal = $('.tjwqtitle').text().trim();
 if($(".listbtnz").hasClass("tjwqActive")) {
 	var secVal = $('.tjwqActive').text();
 }
-if (secVal == undefined) {
-    $('#tjwqtitlenav').text('欢迎登陆本系统！您当前的位置为:' + tjwqTitleVal);
+if(secVal == undefined) {
+	$('#tjwqtitlenav').text('欢迎登陆本系统！您当前的位置为:' + tjwqTitleVal);
 } else {
-    $('#tjwqtitlenav').text('欢迎登陆本系统！您当前的位置为:' + tjwqTitleVal + ' > ' + secVal);
+	$('#tjwqtitlenav').text('欢迎登陆本系统！您当前的位置为:' + tjwqTitleVal + ' > ' + secVal);
 }
 
 $('#tjwqBtn div').click(function() {
@@ -62,13 +62,13 @@ var linkjump = {
 	"公文-发文管理_校核": "File-document-send.html",
 	"公文-发文管理_盖章": "File-document-send.html",
 	"公文-发文管理_发文": "File-document-send.html",
-	
+
 	"公文-收文管理_收文登记": "documentsInFile.html",
 	"公文-收文管理_领导批阅": "documentsInFileHandle.html",
 	"公文-收文管理_收文传阅": "documentsInFileHandle.html",
 	"公文-收文管理_收文承办": "documentsInFileHandle.html",
 	"公文-收文管理_收文归档": "documentsInFileHandle.html",
-	
+
 	"简报-发文管理_拟稿": "briefingSendFile.html",
 	"简报-发文管理_核稿": "briefingSendFileHandle.html",
 	"简报-发文管理_审核": "briefingSendFileHandle.html",
@@ -76,30 +76,30 @@ var linkjump = {
 	"简报-发文管理_校核": "briefingSendFileHandle.html",
 	"简报-发文管理_盖章": "briefingSendFileHandle.html",
 	"简报-发文管理_发文": "briefingSendFileHandle.html",
-	
+
 	"简报-收文管理_收文登记": "briefingInFile.html",
 	"简报-收文管理_领导批阅": "briefingInFileHandle.html",
 	"简报-收文管理_收文传阅": "briefingInFileHandle.html",
 	"简报-收文管理_收文承办": "briefingInFileHandle.html",
 	"简报-收文管理_收文归档": "briefingInFileHandle.html",
-	
-	"公文管理":'File-document-manager.html',
-	"公文搜索":'File-document-search.html',
-	"我的任务":'Work-myTask.html',
-	
-	"权限管理":'System-power.html',
-	"组织管理":'System-organization.html',
-	"人员管理":'System-personnel.html',
-	"统计查询":'Statistics-searchInfo.html',
-	
-	"值班表":'statistics-workingshift.html',
-	"考核表":'statistics-check.html',
-	"工作计划":'Work-plan.html',
-	"通知通告":'Work-bulletin.html',
-	"收发单位管理":'unit-file-management.html',
-	
+
+	"公文管理": 'File-document-manager.html',
+	"公文搜索": 'File-document-search.html',
+	"我的任务": 'Work-myTask.html',
+
+	"权限管理": 'System-power.html',
+	"组织管理": 'System-organization.html',
+	"人员管理": 'System-personnel.html',
+	"统计查询": 'Statistics-searchInfo.html',
+
+	"值班表": 'statistics-workingshift.html',
+	"考核表": 'statistics-check.html',
+	"工作计划": 'Work-plan.html',
+	"通知通告": 'Work-bulletin.html',
+	"收发单位管理": 'unit-file-management.html',
+
 }
-$(document).on("click", "[frameHref]", function () {
+$(document).on("click", "[frameHref]", function() {
 	var _thishref_ = $(this).attr("frameHref");
 	if(_thishref_ == undefined || _thishref_ == null || _thishref_ == "") {
 		if($(this).children("div").length) {
@@ -131,15 +131,6 @@ window.onload = function() {
 	oUl.innerHTML += oUl.innerHTML;
 	oUl.style.width = aLi[0].offsetWidth * aLi.length + 'px';
 
-	/*roll_timer = setInterval(function() {
-	oUl.style.left = oUl.offsetLeft + speed + 'px';
-	if(oUl.offsetLeft < -oUl.offsetWidth / 2) {
-		oUl.style.left = 0 + 'px';
-	} else if(oUl.offsetLeft > (0)) {
-		oUl.style.left = -oUl.offsetWidth / 2 + 'px';
-	}
-	}, 30);*/
-
 	//左
 	oBtn1.onclick = function() {
 		speed = 82;
@@ -163,26 +154,28 @@ window.onload = function() {
 };
 
 /*--------------------------------*/
-$('.chartmapbox_xk ul a').click(function () {
-
-    if (!$(this).is(".on_xk")) {
-        $(this).addClass("on_xk").parent("li").siblings("li").children("a").removeClass("on_xk");
-
-    }
-    if ($(this)[0].id == "id4") {
-        $("#chart_xk").css("display", "block");
-        $("#chart_xk1").css("display", "none");
-        $("#chart_xk2").css("display", "none");
-    }
-    if ($(this)[0].id == "id5") {
-        $("#chart_xk").css("display", "none");
-        $("#chart_xk1").css("display", "block");
-        $("#chart_xk2").css("display", "none");
-    }
-    if ($(this)[0].id == "id6") {
-        $("#chart_xk").css("display", "none");
-        $("#chart_xk1").css("display", "none");
-        $("#chart_xk2").css("display", "block");
-    }
+/*左侧菜单列表收缩、展开*/
+function fnDisplayNavBar(obj) {
+	if($(obj).hasClass("open")) {
+		$(obj).removeClass("open");
+		$("body").removeClass("big-page");
+		$('#tjwqBtn').show();
+		$('#tjwqMainframe').css('width', '85%')
+	} else {
+		$(obj).addClass("open");
+		$("body").addClass("big-page");
+		$('#tjwqBtn').hide();
+		$('#tjwqMainframe').css('width', '100%')
+	}
+};
+/*监听窗口大小、设置右侧容器宽度*/
+function resizeWindow() {
+	var hw = $(window).width();
+	var lWrap = $('#tjwqBtn').width();
+	$('#tjwqMainframe').css('width', (hw - lWrap - 2));
+};
+resizeWindow();
+/*实时监听窗口改变*/
+$(window).resize(function() {
+	resizeWindow();
 });
-
