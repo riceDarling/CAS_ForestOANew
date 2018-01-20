@@ -64,63 +64,77 @@
 		<!--请在下方写此页面业务相关的脚本-->
 		<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 		<script type="text/javascript">
-			$('.table-sort').dataTable({
-				"ajax": {
-					url: "http://192.168.0.154:8080/forestoa/role/findByPage",
-					dataSrc: function(result) {
-						//这里result和上面jquery的ajax的代码类似，也是可以得到data.json的数据，但是这样的格式，Datatables不能直接使用，这时候需要在这里处理一下
-						//直接返回Datatables需要的那部分数据即可，看到这里，大家或许又懂了些什么看到了他的强大和灵活
-						return result.data.list;
-					}
-				},
-				"columns": [{
-						"data": "rId"
-					},
-					{
-						"data": "rName"
-					},
-					{
-						"data": "menus",
-						//渲染
-						"render": function(data, type, row, meta) {
-							//type 的值  dispaly sort filter
-							//代表，是显示类型的时候判断值的长度是否超过8，如果是则截取
-							//这里只处理了类型是显示的，过滤和排序返回原始数据
-							var html = '';
-							if(data.length > 0) {
-								for(var i = 0; i < data.length; i++) {
-									html += data[i].mName + '&nbsp;&nbsp;';
-								}
-							}
-							return html;
-						}
-					},
-					{
-						"data": "rId",
-						//渲染
-						"render": function(data, type, row, meta) {
-							var html = '';
-							html += '<a title="编辑" href="javascript:;" onclick="product_edit(\'编辑\',\'system-category-add.html\',\'1\',\'\',' + data + ')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>'
-							html += '<a title="删除" href="javascript:;" onclick="product_del(this,' + data + ')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>';
-							return html;
-						}
-					},
-				],
-
-				"aaSorting": [
-					[1, "desc"]
-				], //默认第几个排序
-				"bStateSave": true, //状态保存
-				"pading": false,
-				"searching": false,
-				"aoColumnDefs": [
-					//{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-					{
-						"orderable": false,
-						"aTargets": [1, 3]
-					} // 不参与排序的列
-				]
+			var config_url = "http://192.168.0.154:8080/forestoa";
+			$(function() {
+				//第一次加载表格
+				createTable();
 			});
+			//初始化表格
+			function createTable() {
+				$('.table-sort').dataTable({
+					"serverSide": true, //服务器分页
+					"searching": false, //关闭搜索框
+					"ordering": false, //是否允许用户排序
+					"bInfo": true, //是否显示页脚信息，DataTables插件左下角显示记录数
+					"bLengthChange": false, //去掉每页多少条框体 
+					"language": {
+						"sProcessing": "处理中..."
+					},
+					"ajax": function(data, callback, settings) {
+						$.ajax({
+							type: "GET",
+							url: config_url + "/role/findByPage",
+							cache: false, //禁用缓存  
+							data: data, //传入已封装的参数  
+							dataType: "json",
+							success: function(result) {
+								//封装返回数据  
+								var returnData = {};
+								returnData.draw = result.data.draw; //这里直接自行返回了draw计数器,应该由后台返回  
+								returnData.recordsTotal = result.data.recordsTotal; //总记录数  
+								returnData.recordsFiltered = result.data.recordsFiltered; //后台不实现过滤功能，每次查询均视作全部结果  
+								returnData.data = result.data.data;
+								//调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染  
+								//此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕  
+								callback(returnData);
+							},
+						});
+					},
+					"columns": [{
+							"data": "rId"
+						},
+						{
+							"data": "rName"
+						},
+						{
+							"data": "menus",
+							//渲染
+							"render": function(data, type, row, meta) {
+								//type 的值  dispaly sort filter
+								//代表，是显示类型的时候判断值的长度是否超过8，如果是则截取
+								//这里只处理了类型是显示的，过滤和排序返回原始数据
+								var html = '';
+								if(data.length > 0) {
+									for(var i = 0; i < data.length; i++) {
+										html += data[i].mName + '&nbsp;&nbsp;';
+									}
+								}
+								return html;
+							}
+						},
+						{
+							"data": "rId",
+							//渲染
+							"render": function(data, type, row, meta) {
+								var html = '';
+								html += '<a title="编辑" href="javascript:;" onclick="product_edit(\'编辑\',\'System-power-add.html\',' + data + ')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>'
+								html += '<a title="删除" href="javascript:;" onclick="product_del(this,' + data + ')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>';
+								return html;
+							}
+						},
+					],
+				});
+			};
 
 			/*查看*/
 			function product_show(title, url, id) {
@@ -145,30 +159,47 @@
 				var index = layer.open({
 					type: 2,
 					title: title,
-					content: url,
-					success: function(layero, index) {
-						//打开新的页面之后，把当前要编辑的角色对象传到layui-layer-title的自定义属性rId中，方便编辑页面使用
-						$(".layui-layer-title").attr("rId",id);
-					}
+					//打开新的页面之后，把当前要编辑的角色对象id传到url中，方便编辑页面使用
+					content: url + '?rId=' + id,
 				});
 				layer.full(index);
 			};
 			/*删除、撤销*/
 			function product_del(obj, id) {
-				layer.confirm('确认要撤销吗？', function(index) {
+				layer.confirm('确认要删除吗？', function(index) {
 					$.ajax({
 						type: 'POST',
-						url: '',
+						url: config_url + "/role/del",
 						dataType: 'json',
+						data: {
+							"rId": id
+						},
 						success: function(data) {
-							$(obj).parents("tr").remove();
-							layer.msg('已撤销!', {
+							if(data.success) {
+								$(obj).parents("tr").remove();
+								layer.msg('已删除!', {
+									icon: 1,
+									time: 1000
+								});
+
+								//销毁表格
+								$('.table-sort').dataTable().fnDestroy();
+								//重新绘制表格
+								createTable();
+							} else {
+								//console.log(data.msg);
+								layer.msg(data.msg, {
+									icon: 1,
+									time: 1000
+								});
+							}
+						},
+						error: function(data) {
+							//console.log(data.msg);
+							layer.msg(data.msg, {
 								icon: 1,
 								time: 1000
 							});
-						},
-						error: function(data) {
-							console.log(data.msg);
 						},
 					});
 				});

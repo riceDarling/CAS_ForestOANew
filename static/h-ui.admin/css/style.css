@@ -1,3 +1,81 @@
 @charset "utf-8";
+
 /* 你自己的样式 */
+
+.radio-box {
+	padding-left: 0 !important;
+}
+
+/*.handle {
+	border: 1px solid #ccc !important;
+	color: #ccc !important;
+}
+
+.handle:hover {
+	border: 1px solid #ccc !important;
+	color: #ccc !important;
+}
+
+.returns {
+	border: 1px solid #FF0000 !important;
+	color: #FF0000 !important;
+}
+
+.currents {
+	border: 1px solid green !important;
+	color: green !important;
+}
+*/
+
+.bordered-link {
+	width: 88px;
+	height: 56px;
+	text-align: center;
+	display: inline-block;
+	padding: 8px;
+	border: 3px solid #ccc;
+	border-radius: 6px;
+	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+	text-decoration: none;
+	font-size: 14px;
+	text-transform: uppercase;
+	color: #222;
+	margin-left: 10px;
+}
+
+.bordered-link:hover {
+	border-color: #FDD68B;
+}
+
+.bordered-link:active {
+	border-color: #FEE8BD;
+}
+
+.bordered-link span {
+	display: block;
+}
+
+.cl1 {
+	border: 1px solid #96c2f1;
+	background: #eff7ff
+}
+
+.cl2 {
+	border: 1px solid #9bdf70;
+	background: #f0fbeb
+}
+
+.cl3 {
+	border: 1px solid #bbe1f1;
+	background: #eefaff
+}
+
+.fs1 {
+	font-size: 18px;
+}
+
+.fs2 {
+	font-size: 8px;
+}
+
 

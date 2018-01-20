@@ -27,59 +27,71 @@
 
 	<body>
 		<article class="page-container">
-			<form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
+			<form action="" method="post" class="form form-horizontal" id="userInsertForm">
 				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>工号：</label>
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>警号：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="input-text" value="" placeholder="" id="roleNum" name="roleNum">
+						<input type="text" class="input-text" value="" placeholder="" id="uNumber" name="uNumber" readonly  unselectable="on">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>姓名：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="input-text" value="" placeholder="" id="roleName" name="roleName">
+						<input type="text" class="input-text" value="" placeholder="" id="uName" name="uName" readonly  unselectable="on">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>性别：</label>
-					<div class="formControls col-xs-8 col-sm-9 skin-minimal">
-						<div class="radio-box">
-							<input name="sex" type="radio" id="sex-1" checked>
-							<label for="sex-1">男</label>
-						</div>
-						<div class="radio-box">
-							<input type="radio" id="sex-2" name="sex">
-							<label for="sex-2">女</label>
-						</div>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text" value="" placeholder="" id="sex" name="sex" readonly  unselectable="on">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="input-text" value="" placeholder="" id="phone" name="phone">
+						<input type="text" class="input-text" value="" placeholder="" id="phone" name="phone" readonly  unselectable="on">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>邮箱：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="input-text" placeholder="@" name="email" id="email">
+						<input type="text" class="input-text" placeholder="@" name="email" id="email" readonly  unselectable="on">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>组织名称：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text" value="" placeholder="" id="oName" name="oName" readonly  unselectable="on">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>职位名称：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="input-text" value="" placeholder="" id="roleName" name="roleName">
+						<input type="text" class="input-text" value="" placeholder="" id="rName" name="rName" readonly  unselectable="on">
 					</div>
 				</div>
+				<!--<div class="row cl">-->
+				<!--<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>登录账号：</label>-->
+				<!--<div class="formControls col-xs-8 col-sm-9">-->
+				<!--<input type="text" class="input-text" value="" placeholder="" id="loginName" name="loginName" readonly  unselectable="on">-->
+				<!--</div>-->
+				<!--</div>-->
 				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-3">备注：</label>
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>登录密码：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="input-text" value="" placeholder="" id="" name="">
+						<input type="text" class="input-text" value="" placeholder="" id="loginPassword" name="loginPassword" readonly  unselectable="on">
 					</div>
 				</div>
+				<!--<div class="row cl">-->
+				<!--<label class="form-label col-xs-4 col-sm-3">备注：</label>-->
+				<!--<div class="formControls col-xs-8 col-sm-9">-->
+				<!--<input type="text" class="input-text" value="" placeholder="" id="" name="">-->
+				<!--</div>-->
+				<!--</div>-->
 				<div class="row cl">
 					<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-						<button type="submit" class="btn btn-success radius" id="admin-role-save" name="admin-role-save"><i class="icon-ok"></i> 确定</button>
+						<!--<button type="submit" class="btn btn-success radius" id="userInsert" name="admin-role-save"><i class="icon-ok"></i> 确定</button>-->
+						<input type="button" onClick="layer_close();" class="btn btn-default radius" value="&nbsp;&nbsp;返回&nbsp;&nbsp;"></input>
 					</div>
 				</div>
 			</form>
@@ -95,6 +107,46 @@
 		<script type="text/javascript" src="lib/jquery.validation/1.14.0/validate-methods.js"></script>
 		<script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
 		<script type="text/javascript">
+
+            //初始化数据
+            window.onload = function () {
+                var str=location.href; //取得整个地址栏
+                var num=str.indexOf("?");
+                str=str.substr(num+1);
+                var url="http://localhost:8080/forestoa/user/selectByKey?"+str;
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    dataType: "json",
+                    success: function (data) {
+                        var roles=data.roles;
+                        var r="";
+                        console.log(data.org.oName);
+                        $("#uNumber").val(data.uNumber);
+                        $("#uName").val(data.uName);
+                        $("#sex").val(data.sex);
+                        $("#phone").val(data.phone);
+                        $("#email").val(data.email);
+                        $("#oName").val(data.org.oName);
+                        for(var i=0;i<roles.length;i++){
+                            if(i<roles.length-1){
+                                r+=roles[i].rName+","
+                            }else{
+                                r+=roles[i].rName
+                            }
+
+                        }
+                        $("#rName").val(r);
+                        //$("#loginName").val(data.loginName);
+                        $("#loginPassword").val(data.loginPassword);
+                    }
+                });
+
+            };
+
+
+
+
 			$(function() {
 				$(".permission-list dt input:checkbox").click(function() {
 					$(this).closest("dl").find("dd input:checkbox").prop("checked", $(this).prop("checked"));

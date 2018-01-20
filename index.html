@@ -25,7 +25,6 @@
 			#listBtn>.btngrp>a {
 				width: 24.5% !important;
 			}
-			
 			.ui-container {
 				position: absolute;
 				left: 0;
@@ -38,7 +37,6 @@
 				padding-left: 100px;
 				padding-right: 100px;
 			}
-			
 			.ui-container img:hover {
 				position: relative;
 				top: 2px;
@@ -122,7 +120,7 @@
 								</div>
 							</div>
 						</a>
-						<a class="otherManageBtn" href="Javascript:;">
+						<a href="Work-archives.html">
 							<div class="target-button">
 								<div>
 									<img src="images/index/15.png" width="70px" height="70px" />
@@ -162,14 +160,12 @@
 								</div>
 							</div>
 						</a>
-						<!--<a class="otherManageBtn" href="unitManagement.html">-->
 							<a class="otherManageBtn" href="Javascript:;">
 							<div class="target-button">
 								<div>
 									<img src="images/index/17.png" width="70px" height="70px" />
 								</div>
 								<div class="mt-10">
-									<!--<p>收发单位管理</p>-->
 									<p>工作日志</p>
 								</div>
 							</div>
@@ -214,6 +210,16 @@
 								</div>
 							</div>
 						</a>
+						<a href="unitManagement.html">
+							<div class="target-button">
+								<div>
+									<img src="images/index/14.png" width="70px" height="70px" />
+								</div>
+								<div class="mt-10">
+									<p>收发单位管理</p>
+								</div>
+							</div>
+						</a>
 						<div style="clear: both;"></div>
 					</div>
 				</div>
@@ -225,9 +231,7 @@
 		<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
 		<script type="text/javascript">
 			$('.otherManageBtn').click(function() {
-				layer.confirm('功能正在完善中...', {
-					title: '友情提示'
-				});
+				layer.msg('功能正在完善中...', {icon: 5});
 			});
 		</script>
 	</body>

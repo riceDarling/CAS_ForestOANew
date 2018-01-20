@@ -65,7 +65,7 @@ var linkjump = {
 	"组织管理": 'System-organization.html',
 	"人员管理": 'System-personnel.html',
 	"统计查询": 'Statistics-searchInfo.html',
-
+	"档案管理": 'Work-archives-manage.html',
 	"值班表": 'statistics-workingshift.html',
 	"考核表": 'statistics-check.html',
 	"工作计划": 'Work-plan.html',
@@ -130,11 +130,13 @@ window.onload = function() {
 /*--------------------------------*/
 /*左侧菜单列表收缩、展开*/
 function fnDisplayNavBar(obj) {
+	var hw = $(window).width();
+	var lWrap = $('#tjwqBtn').width();
 	if($(obj).hasClass("open")) {
 		$(obj).removeClass("open");
 		$("body").removeClass("big-page");
 		$('#tjwqBtn').show();
-		$('#tjwqMainframe').css('width', '85%')
+		$('#tjwqMainframe').css('width', (hw - lWrap - 2));
 	} else {
 		$(obj).addClass("open");
 		$("body").addClass("big-page");

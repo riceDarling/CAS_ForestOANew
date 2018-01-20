@@ -32,11 +32,11 @@
 		<div class="page-container">
 			<div class="cl pd-5 bg-1 bk-gray"> <span> <a class="btn btn-primary radius" href="javascript:;" onclick="product_add('添加人员','System-personnel-add.html')"><i class="Hui-iconfont">&#xe600;</i> 添加人员</a> </span> 
 			</div>
-			<table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+			<table id="userTable" class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
 				<thead>
 					<tr class="text-c">
 						<th width="40">ID</th>
-						<th width="100">工号</th>
+						<th width="100">警号</th>
 						<th width="100">姓名</th>
 						<th width="100">性别</th>
 						<th width="100">职位名称</th>
@@ -47,40 +47,7 @@
 						<th width="70">操作</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr class="text-c">
-						<td>1</td>
-						<td>1000111</td>
-						<td>张三</td>
-						<td>男</td>
-						<td>普通职工</td>
-						<td>13854181845</td>
-						<td>admin@126.com</td>
-						<td>2017-7-7</td>
-						<td><span class="label label-success radius">在职</span></td>
-						<td class="f-14">
-							<a title="详情" href="javascript:;" onclick="product_show('详情','System-personnel-details.html','1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe665;</i></a>
-							<a title="编辑" href="javascript:;" onclick="product_edit('编辑','System-personnel-edit.html','1')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
-							<a title="删除" href="javascript:;" onclick="product_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
-						</td>
-					</tr>
-					<tr class="text-c">
-						<td>1</td>
-						<td>1000112</td>
-						<td>李四</td>
-						<td>男</td>
-						<td>普通职工</td>
-						<td>13854181845</td>
-						<td>admin@126.com</td>
-						<td>2017-7-7</td>
-						<td><span class="label radius">离职</span></td>
-						<td class="f-14">
-							<a title="详情" href="javascript:;" onclick="product_show('详情','personnel-manage-add.html','1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe665;</i></a>
-							<a title="编辑" href="javascript:;" onclick="product_edit('编辑','personnel-manage-add.html','1')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
-							<a title="删除" href="javascript:;" onclick="product_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
-						</td>
-					</tr>
-				</tbody>
+
 			</table>
 		</div>
 		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
@@ -91,68 +58,156 @@
 		<!--请在下方写此页面业务相关的脚本-->
 		<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 		<script type="text/javascript">
-			$('.table-sort').dataTable({
-				"aaSorting": [
-					[1, "desc"]
-				], 
-				"bStateSave": true, //状态保存
-				"pading": false,
-				"searching": false,
-				"aoColumnDefs": [
-					{
-						"orderable": false,
-						"aTargets": [1, 9]
-					} // 不参与排序的列
-				]
-			});
+            //初始化datatable
+            $(function(){
+                $("#userTable").dataTable({
+
+                    //  "destroy": true,       //销毁表格对象
+                    "aLengthMenu": [5, 10, 20],  //用户可自选每页展示数量 5条或10条
+                    "searching": false,//禁用搜索（搜索框）
+                    "ajax": {  //ajax方式向后台发送请求
+                        "type": "POST",
+                        "url": "http://localhost:8080/forestoa/user/selectAll",
+
+                        "dataType": "json",
+                        dataSrc: function (result) {
+                            //这里result和上面jquery的ajax的代码类似，也是可以得到data.json的数据，但是这样的格式，Datatables不能直接使用，这时候需要在这里处理一下
+                            //直接返回Datatables需要的那部分数据即可，看到这里，大家或许又懂了些什么看到了他的强大和灵活
+                            return result.data.list;
+                        }
+                    },
+                    "columns": [//对接收到的json格式数据进行处理，data为json中对应的key
+                        {"data": "uId"},
+                        {"data": "uNumber"},
+                        {"data": "uName"},
+                        {"data": "sex"},
+                        {"data": "roles[].rName"},
+                        {"data": "phone"},
+                        {"data": "email"},
+                        {"data": "creatTime"},
+                        {"data": "oStatus"},
+                    ],
+                    //渲染
+                    "columnDefs": [
+                        {
+                            targets: 7,
+                            data: "creatTime",
+                            //title: "姓名",
+                            render: function (data) {
+                                return getMyDate(data);
+                            }
+                        },
+                        {
+                            targets: 8,
+                            data: "oStatus",
+                            //title: "姓名",
+                            render: function (data) {
+                                if(data==0){
+                                    return "在职";
+                                }else {
+                                    return "离职";
+                                }
+
+                            }
+                        },
+                        {
+                            "targets": 9,
+                            "class": "button",
+                            //"data": "uId",defaultContent
+                            "bSortable": false,
+                            "data":function(data) {
+                                return  '<a onclick=product_show("用户查看","System-personnel-details.html","'+data.uId+'") class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe665;</i></a>'+
+                                    '<a onclick=product_edit("用户编辑","System-personnel-edit.html","'+data.uId+'") class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>'+
+                                    '<a onclick=product_del("用户删除","'+data.uId+'") class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>';
+                            }
+                        }
+                    ],
+
+                })
+            });
+            //将时间戳格式化
+            function getMyDate(time){
+                if(typeof(time)=="undefined"){
+                    return "";
+                }
+                var oDate = new Date(time),
+                    oYear = oDate.getFullYear(),
+                    oMonth = oDate.getMonth()+1,
+                    oDay = oDate.getDate(),
+                    oHour = oDate.getHours(),
+                    oMin = oDate.getMinutes(),
+                    oSen = oDate.getSeconds(),
+                    oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) +' '+ getzf(oHour) +':'+ getzf(oMin) +':'+getzf(oSen);//最后拼接时间
+
+                return oTime;
+            };
+
+            //补0操作,当时间数据小于10的时候，给该数据前面加一个0
+            function getzf(num){
+                if(parseInt(num) < 10){
+                    num = '0'+num;
+                }
+                return num;
+            }
+
 
 			/*查看*/
-			function product_show(title, url, id) {
-				var index = layer.open({
-					type: 2,
-					title: title,
-					content: url
-				});
-				layer.full(index);
-			}
+            function product_show(title, url, id) {
+                var index = layer.open({
+                    type: 2,
+                    title: title,
+                    content: url+"?uId="+id
+                });
+                layer.full(index);
+            }
 			/*添加*/
-			function product_add(title, url) {
-				var index = layer.open({
-					type: 2,
-					title: title,
-					content: url
-				});
-				layer.full(index);
-			};
+            function product_add(title, url) {
+                var index = layer.open({
+                    type: 2,
+                    title: title,
+                    content: url
+                });
+                layer.full(index);
+            };
 			/*修改*/
-			function product_edit(title, url, id) {
-				var index = layer.open({
-					type: 2,
-					title: title,
-					content: url
-				});
-				layer.full(index);
-			};
+            function product_edit(title, url, id) {
+                var index = layer.open({
+                    type: 2,
+                    title: title,
+                    content: url+"?uId="+id
+                });
+                layer.full(index);
+            };
 			/*删除、撤销*/
-			function product_del(obj, id) {
-				layer.confirm('确认要撤销吗？', function(index) {
-					$.ajax({
-						type: 'POST',
-						url: '',
-						dataType: 'json',
-						success: function(data) {
-							$(obj).parents("tr").remove();
-							layer.msg('已撤销!', {
-								icon: 1,
-								time: 1000
-							});
-						},
-						error: function(data) {
-							console.log(data.msg);
-						},
-					});
-				});
-			};
+            function product_del(obj, id) {
+                layer.confirm('确认要删除吗？', function(index) {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'http://localhost:8080/forestoa/user/delete?uId='+id,
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data.success == false) {
+
+                            }
+
+                            if (data.success==true) {
+//                                layer.msg('删除成功!', {
+//                                    icon: 1,
+//                                    time: 1000
+//                                });
+                                //保存成功跳转到主页面
+                                window.location.href = "System-personnel.html";
+                                window.parent.location.reload();
+                                parent.layer.close(index);
+                            }
+
+                        },
+                        error: function(data) {
+                            console.log(data.msg);
+                        },
+                    });
+                });
+            };
 		</script>
 	</body>
 

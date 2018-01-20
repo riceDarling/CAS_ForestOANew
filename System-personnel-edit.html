@@ -27,29 +27,29 @@
 
 	<body>
 		<article class="page-container">
-			<form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
+			<form action="" method="post" class="form form-horizontal" id="userInsertForm">
+				<input type="hidden" id="uId" name="uId" value="" />
 				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>工号：</label>
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>警号：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="input-text" value="" placeholder="" id="roleNum" name="roleNum">
+						<input type="text" class="input-text" value="" placeholder="" id="uNumber" name="uNumber">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>姓名：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="input-text" value="" placeholder="" id="roleName" name="roleName">
+						<input type="text" class="input-text" value="" placeholder="" id="uName" name="uName">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>性别：</label>
 					<div class="formControls col-xs-8 col-sm-9 skin-minimal">
 						<div class="radio-box">
-							<input name="sex" type="radio" id="sex-1" checked>
-							<label for="sex-1">男</label>
+							<label><input id="m" name="sex" type="radio" value="男"/>男</label>
+
 						</div>
 						<div class="radio-box">
-							<input type="radio" id="sex-2" name="sex">
-							<label for="sex-2">女</label>
+							<label><input id="w" name="sex" type="radio" value="女" />女</label>
 						</div>
 					</div>
 				</div>
@@ -66,20 +66,53 @@
 					</div>
 				</div>
 				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>职位名称：</label>
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>组织名称：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="input-text" value="" placeholder="" id="roleName" name="roleName">
+						<input id="citySel" type="text" name="" onclick="showMenu(); return false;" class="input-text"
+							   value="" placeholder="请选择所属组织">
+					</div>
+
+					<div id="menuContent" class="menuContent" style=" background:#FFFFFF;width: 300px;height: 200px; overflow-y: scroll;display:none; position: absolute;z-index:100;">
+						<ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
 					</div>
 				</div>
 				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-3">备注：</label>
+
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>职位名称：</label>
+					<div class="formControls col-xs-8 col-sm-9" >
+						<input type="text" class="input-text" value="" placeholder="" id="rName" name="rName">
+					</div>
+
+
+					<div class="formControls col-xs-8 col-sm-9" id="roles">
+
+					</div>
+
+
+
+				</div>
+				<!--<div class="row cl">-->
+				<!--<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>登录账号：</label>-->
+				<!--<div class="formControls col-xs-8 col-sm-9">-->
+				<!--<input type="text" class="input-text" value="" placeholder="" id="loginName" name="loginName">-->
+				<!--</div>-->
+				<!--</div>-->
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>登录密码：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="input-text" value="" placeholder="" id="" name="">
+						<input type="text" class="input-text" value="" placeholder="" id="loginPassword" name="loginPassword">
 					</div>
 				</div>
+				<!--<div class="row cl">-->
+				<!--<label class="form-label col-xs-4 col-sm-3">备注：</label>-->
+				<!--<div class="formControls col-xs-8 col-sm-9">-->
+				<!--<input type="text" class="input-text" value="" placeholder="" id="" name="">-->
+				<!--</div>-->
+				<!--</div>-->
 				<div class="row cl">
 					<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-						<button type="submit" class="btn btn-success radius" id="admin-role-save" name="admin-role-save"><i class="icon-ok"></i> 确定</button>
+						<input type="button" id="userInsert"  class="btn btn-primary radius" value="保存"/>
+						<input type="button" onClick="layer_close();" class="btn btn-default radius" value="&nbsp;&nbsp;取消&nbsp;&nbsp;"/>
 					</div>
 				</div>
 			</form>
@@ -94,7 +127,382 @@
 		<script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 		<script type="text/javascript" src="lib/jquery.validation/1.14.0/validate-methods.js"></script>
 		<script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
+		<script type="text/javascript" src="lib/zTree/v3/js/jquery.ztree.core-3.5.min.js"></script>
 		<script type="text/javascript">
+
+            var roles="";
+            window.onload = function () {
+                var str=location.href; //取得整个地址栏
+                var num=str.indexOf("?");
+                str=str.substr(num+1);
+                //alert(str);
+                var uId=str.substring(4);
+                var url="http://localhost:8080/forestoa/user/selectByKey?"+str;
+                $("#uId").val(uId);
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    dataType: "json",
+                    success: function (data) {
+                        roles=data.roles;
+                        var r="";
+                        $("#uId").val(data.uId);
+                        $("#uNumber").val(data.uNumber);
+                        $("#uName").val(data.uName);
+
+
+                        if((data.sex)=="男"){
+                            $("#m").attr("checked","checked")
+                        }else {
+                            $("#w").attr("checked","checked")
+                        }
+
+
+                        $("#phone").val(data.phone);
+                        $("#email").val(data.email);
+                        $("#citySel").val(data.org.oName);
+                        $("#citySel").attr("name", data.org.oId);
+//                            $("#roleName").val(data.roles.rName);
+
+
+                        for(var i=0;i<roles.length;i++){
+                            if(i<roles.length-1){
+                                r+=roles[i].rName+","
+                            }else{
+                                r+=roles[i].rName
+                            }
+
+                        }
+//                            //var role=$("#rName").val(r);
+//
+                        $("#rName").val(r);
+
+//                            $("#loginName").val(data.loginName);
+                        $("#loginPassword").val(data.loginPassword);
+                    }
+                });
+
+            };
+
+
+            $("#userInsert").on("click", function () {
+
+                var r="";
+                var uId = $("#uId").val();
+                var uNumber = $("#uNumber").val();
+                var uName = $("#uName").val();
+                var sex = $('input:radio[name="sex"]:checked ').val();
+                var phone = $("#phone").val();
+                var email = $("#email").val();
+                var oId = $("#citySel").attr("name");
+                var rName = $("#rName").val();
+                var rId="";
+                $("input:checkbox[name='rId']:checked").each(function() { // 遍历name=test的多选框
+                    $(this).val();  // 每一个被选中项的值
+                    rId+=$(this).val()+",";
+
+                });
+                if(rId==""&&rName==""){
+//                        for(var i=0;i<roles.length;i++) {
+//
+//                                rId += roles[i].rId + ","}
+
+                    alert("角色不可以为空");
+                    return false;
+
+                }
+
+                if(rId==""){
+                    for(var i=0;i<roles.length;i++) {
+
+                        rId += roles[i].rId + ","}
+
+
+
+                }
+
+
+
+
+
+                // var loginName = $("#loginName").val();
+                var loginPassword = $("#loginPassword").val();
+
+                if(uNumber=="") {
+                    alert("警号不可以为空");
+                    return false;
+                }
+                else{
+                    reg=/^[0-9]*$/;
+                    if(!reg.test(uNumber)){
+                        alert("对不起，警号必须输入整数!");//请将“整数类型”要换成你要验证的那个属性名称！
+                        return false;
+                    }
+                }
+                if(uName=="") {
+                    alert("姓名不可以为空");
+                    return false;
+                }
+                if(sex=="") {
+                    alert("性别不可以为空");
+                    return false;
+                }
+                if(phone==""||phone.length!=11) {
+                    alert("请输入正常的11位手机号！！");
+                    return false;
+                }else{
+                    reg=/^[-+]?\d*$/;
+                    if(!reg.test(phone)){
+                        alert("对不起，手机好请输入的整数!");//请将“整数类型”要换成你要验证的那个属性名称！
+                        return false;
+                    }
+                }
+                if(oId=="") {
+                    alert("组织不可以为空");
+                    return false;
+                }if(email=="") {
+                    alert("邮箱不可以为空");
+                    return false;
+                }
+
+                if(email.length!=0){
+                    reg=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+                    if(!reg.test(email)){
+                        alert("对不起，您输入的邮箱类型格式不正确!");
+                        return false;
+                    }
+                }
+                if(loginPassword=="") {
+                    alert("登录密码不可以为空");
+                    return false;
+                }
+
+
+
+
+
+
+
+
+
+                $.ajax({
+                    type: "post",
+                    url: "http://localhost:8080/forestoa/user/update",
+//                        data: $("#userInsertForm").serialize(),
+                    data:{
+                        "uId":uId,
+                        "uNumber":uNumber,
+                        "uName":uName,
+                        "sex":sex,
+                        "phone":phone,
+                        "email":email,
+                        "oId":oId,
+                        "rIds":rId,
+                        //"loginName":loginName,
+                        "loginPassword":loginPassword
+                    },
+                    success: function (data) {
+
+                        if (data.success==false){
+                            alert("编辑人员失败！！");
+
+                        };
+                        if(data.success==true){
+                            alert("编辑人员成功！！");
+                            //保存成功跳转到主页面
+                            window.location.href = "System-personnel.html";
+                            window.parent.location.reload();
+                            parent.layer.close(index);
+                        }
+                        //confirm2()
+                    },
+                    error:function () {
+                    }
+                });
+
+            });
+
+
+
+
+
+
+
+
+            var setting = {
+                view: {
+                    dblClickExpand: false
+                },
+                data: {
+                    key: {
+                        name: "oName"
+                    },
+                    simpleData: {
+                        //enable: true,
+                        idKey: "oId",
+                        pIdKey: "parenteId",
+                        rootPId: ""
+                    }
+                },
+                callback: {
+                    beforeClick: beforeClick,
+                    onClick: onClick
+                }
+            };
+
+            function beforeClick(treeId, treeNode) {
+                return treeNode;
+
+            }
+
+            function onClick(e, treeId, treeNode) {
+
+                $("#rName").hide();
+                $("#rName").val("");
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/forestoa/role/findByoId",
+                    data: {
+                        "oId": treeNode.oId
+                    },
+                    dataType: "json",
+                    success: function (result) {
+                        var roles=result.data;
+                        var arr="";
+                        for(var i=0;i<roles.length;i++){
+//                        alert(roles[i].rName)
+                            if((i+1)%6==0){
+                                arr+='<input name="rId" type="checkbox" value="'+roles[i].rId+'"><label>'+roles[i].rName+'</label><br>'
+                            }else {
+                                arr+='<input name="rId" type="checkbox" value="'+roles[i].rId+'"><label>'+roles[i].rName+'</label>'
+                            }
+
+                        }
+                        $("#roles").empty().append(arr);
+                    },
+                    error: function (err) {
+                        alert("error");
+                    }
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+                    nodes = zTree.getSelectedNodes(),
+                    v = "";
+                k = "";
+                nodes.sort(function compare(a, b) {
+                    return a.id - b.id;
+                });
+                for (var i = 0, l = nodes.length; i < l; i++) {
+                    v += nodes[i].oName + ",";
+                    k += nodes[i].oId;
+                }
+                if (v.length > 0) v = v.substring(0, v.length - 1);
+                var cityObj = $("#citySel");
+                $("#citySel").val(); //清空之前得值
+                $("#citySel").val(v); //将oName给所属上级组织赋value值
+                $("#citySel").attr("value", ""); //清空之前得name值
+                $("#citySel").attr("name", k); //将oId给所属上级组织赋name值
+                //cityObj.attr("value", v);
+            }
+
+            function showMenu() {
+                var cityObj = $("#citySel");
+                var cityOffset = $("#citySel").offset();
+                $("#menuContent").css({
+                    left: cityOffset.left + "px",
+                    top: cityOffset.top + cityObj.outerHeight() + "px"
+                }).slideDown("fast");
+
+                $("body").bind("mousedown", onBodyDown);
+            }
+
+            function hideMenu() {
+                $("#menuContent").fadeOut("fast");
+                $("body").unbind("mousedown", onBodyDown);
+            }
+
+            function onBodyDown(event) {
+                if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length > 0)) {
+                    hideMenu();
+                }
+            }
+
+            $(document).ready(function () {
+				/*组织树查询*/
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/forestoa/orgController/getOrgTree",
+                    data: {
+                        "oId": 1
+                    },
+                    dataType: "json",
+                    success: function (result) {
+                        zNodes = result.data;
+                        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+                    },
+                    error: function (err) {
+                        alert("error");
+                    }
+                });
+
+            });
+
+            $("#btn").click(function () { //提交按钮事件
+                var oName = $("#username").val(); //获取组织名称
+                var parenteId = $("input:text").attr("name"); //获取父id
+				/*if(oName!=""){
+
+				 }else{alert("组织名称不能为空!")}
+				 if()*/
+                var json = {
+                    "oName": oName,
+                    //"creatTime": "2018-01-19",
+                    "parenteId": parenteId
+                    //"delFlag":"1"
+                };
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			$(function() {
 				$(".permission-list dt input:checkbox").click(function() {
 					$(this).closest("dl").find("dd input:checkbox").prop("checked", $(this).prop("checked"));
