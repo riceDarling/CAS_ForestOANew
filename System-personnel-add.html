@@ -75,28 +75,25 @@
 				<!--</select>-->
 				<!--</div>-->
 
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>组织名称：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-						<input id="citySel" type="text" name="" onclick="showMenu(); return false;" class="input-text"
-							   value="" placeholder="请选择所属组织">
-					</div>
-
-					<div id="menuContent" class="menuContent" style=" background:#FFFFFF;width: 300px;height: 200px; overflow-y: scroll;display:none; position: absolute;z-index:100;">
-						<!--<div class="formControls col-xs-8 col-sm-9" style="width: 300px;height: 520px; overflow-y: scroll;">-->
-						<ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
+				<div  class="row cl">
+					<div id="add" class="" style="height: 120px;overflow-y: scroll;">
+						<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>组织名称：</label>
+						<div class="formControls col-xs-8 col-sm-3">
+							<input id="citySel" type="text" name="" onclick="showMenu(); return false;" class="input-text" value="" placeholder="请选择所属组织">
+						</div>
+						<div id="menuContent" class="menuContent" style=" background:#FFFFFF;width: 300px;height: 200px; overflow-y: scroll;display:none; position: absolute;z-index:100;">
+							<!--<div class="formControls col-xs-8 col-sm-9" style="width: 300px;height: 520px; overflow-y: scroll;">-->
+							<ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
+						</div>
+						<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>职位名称：</label>
+						<div class="formControls col-xs-8 col-sm-2" id="roles">
+							<input id="" type="text" name=""   class="input-text" value="" placeholder="">
+						</div>
+						<label class="form-label col-xs-4 col-sm-1" style="text-align:left">
+							<i id="addDepartment" class="Hui-iconfont Hui-iconfont-add" style="cursor: pointer;"></i>
+						</label>
 					</div>
 				</div>
-
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>职位名称：</label>
-					<div class="formControls col-xs-8 col-sm-9" id="roles">
-
-					</div>
-
-				</div>
-
-
 				<!--<div class="row cl">-->
 				<!--<label class="form-label col-xs-4 col-sm-3">组织名称：</label>-->
 				<!--<div class="formControls col-xs-8 col-sm-9">-->
@@ -146,11 +143,32 @@
 		<script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
 		<script type="text/javascript" src="lib/zTree/v3/js/jquery.ztree.core-3.5.min.js"></script>
 		<script type="text/javascript">
-
-
-
-
-
+			var count = 1;
+			$('#addDepartment').click(function(){
+				var html=`<div class="removetr">
+				<div class="formControls col-xs-8 col-sm-3 col-xs-offset-4 col-sm-offset-3 mt-20">
+						<input id="${count}" type="text" name="" onclick="showMenu(); return false;" class="input-text" value="" placeholder="请选择所属组织">
+					</div>
+					<div id="menuContent" class="menuContent" style=" background:#FFFFFF;width: 300px;height: 200px; overflow-y: scroll;display:none; position: absolute;z-index:100;">
+						<!--<div class="formControls col-xs-8 col-sm-9" style="width: 300px;height: 520px; overflow-y: scroll;">-->
+						<ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
+					</div>
+					<div class="formControls col-xs-8 col-sm-2 col-xs-offset-4 col-sm-offset-3 mt-20" id="roles">
+						<input id="" type="text" name=""   class="input-text" value="" placeholder="">
+					</div>
+					<label class="form-label col-xs-4 col-sm-1" style="text-align:left;margin-top:20px;">
+						<i class="Hui-iconfont Hui-iconfont-jianhao"  onclick="delDepartment(this)"  style="cursor: pointer;"></i>
+					</label>
+					</div>
+				`
+				$('#add').append(html);
+				count++;
+			})
+			
+			
+			function delDepartment(el){
+				$(el).parent().parent().remove();
+			}
             //点击确定按钮向后台添加数据
             $("#userInsert").on("click", function () {
                 var uNumber = $("#uNumber").val();

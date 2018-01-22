@@ -56,8 +56,9 @@
 					<div class="row cl">
 						<div class="formControls col-xs-8 col-xs-offset-3">
 							<label for="online">
-            <input type="checkbox" name="online" id="online" value="">
-            使我保持登录状态</label>
+           						<input type="checkbox" name="online" id="online" value="">
+          						 使我保持登录状态
+							</label>
 						</div>
 					</div>
 					<div class="row cl">
@@ -100,10 +101,12 @@
 				});
 
 			});
-
-			//	$('#loginBtn').click(function(){
-			//		location.href = 'index.html';
-			//	});
+			
+			var hW = $(window).width();
+			var hH = $(window).height();
+			console.log(hW);
+			console.log(hH);
+			$('.loginWraper').css('background-size','100% 100%');
 		</script>
 	</body>
 

@@ -12,7 +12,7 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-	background: url(../images/index/main-bg.JPG) repeat 0 0;
+	background: url(../images/index/main-bg.jpg) repeat 0 0;
 	background-size: 100% 100%;
 	overflow: auto;
 }
@@ -159,7 +159,7 @@ a {
 	width: 100%;
 	position: absolute;
 	left: 0;
-	top: 102px;
+	top: 100px;
 	font-size: 14px;
 	z-index: 5;
 }

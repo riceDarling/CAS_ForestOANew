@@ -55,12 +55,11 @@ $('#tjwqBtn .listbtnz').click(function() {
 	}
 });
 var linkjump = {
-	"公文办理":'File-document-handle.html',
-	"简报办理":'File-briefing-handle.html',	
+	"公文办理": 'File-document-handle.html',
+	"简报办理": 'File-briefing-handle.html',
 	"公文管理": 'File-document-manager.html',
 	"公文搜索": 'File-document-search.html',
 	"我的任务": 'Work-myTask.html',
-	
 	"权限管理": 'System-power.html',
 	"组织管理": 'System-organization.html',
 	"人员管理": 'System-personnel.html',
