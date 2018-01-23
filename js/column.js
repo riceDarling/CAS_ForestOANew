@@ -55,8 +55,10 @@ $('#tjwqBtn .listbtnz').click(function() {
 	}
 });
 var linkjump = {
-	"公文办理": 'File-document-handle.html',
-	"简报办理": 'File-briefing-handle.html',
+	"公文-发文管理": 'File-document-handle-send.html',
+	"公文-收文管理": 'File-document-handle-receive.html',
+	"简报-发文管理": 'File-briefing-handle-send.html',
+	"简报-收文管理": 'File-briefing-handle-receive.html',
 	"公文管理": 'File-document-manager.html',
 	"公文搜索": 'File-document-search.html',
 	"我的任务": 'Work-myTask.html',
@@ -127,6 +129,7 @@ window.onload = function() {
 };
 
 /*--------------------------------*/
+
 /*左侧菜单列表收缩、展开*/
 function fnDisplayNavBar(obj) {
 	var hw = $(window).width();
@@ -150,7 +153,42 @@ function resizeWindow() {
 	$('#tjwqMainframe').css('width', (hw - lWrap - 2));
 };
 resizeWindow();
-/*实时监听窗口改变*/
+
+function resizeBody() {
+	var bodyH = $(window).height();
+	var headerH = $('#tjwq_header').height();
+	var navH = $('#nav').height();
+	//console.log(bodyH);
+	//console.log(bodyH -headerH -navH );
+	$('.pagewrap').css('height', (bodyH - headerH - navH));
+	$('#tjwqMainframe_bodybox').css('height', (bodyH - headerH - navH));
+};
+resizeBody();
+
+function resizeWarp() {
+	$('.pngfix').addClass("open");
+	$("body").addClass("big-page");
+	$('#tjwqBtn').hide();
+	$('#tjwqMainframe').css('width', '100%')
+}
+resizeWarp();
+
 $(window).resize(function() {
 	resizeWindow();
+	resizeBody();
+	resizeWarp();
+});
+
+/***/
+$("#ui-toggle-1").click(function() {
+	$("#ui-content-1").fadeToggle(1000);
+});
+$("#ui-toggle-2").click(function() {
+	$("#ui-content-2").fadeToggle(1000);
+});
+$("#ui-toggle-3").click(function() {
+	$("#ui-content-3").fadeToggle(1000);
+});
+$("#ui-toggle-4").click(function() {
+	$("#ui-content-4").fadeToggle(1000);
 });

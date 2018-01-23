@@ -27,9 +27,33 @@
 				height: 250px;
 			}
 			
-			@media (max-width: 767px) {
-				.form-horizontal .form-label {
-					text-align: right;
+			.logo {
+				height: 328px;
+				top: 100px;
+			}
+			
+			@media only screen and (min-width: 1280px) and (max-width: 1366px) {
+				.logo {
+					top: 100px;
+				}
+			}
+			
+			@media only screen and (min-width: 1025px) and (max-width: 1279px) {
+				.logo {
+					top: 40px;
+				}
+			}
+			
+			@media only screen and (min-width: 800px) and (max-width: 1024px) {
+				.logo {
+					width: 50%;
+				}
+				.loginBox {
+					width: 360px !important;
+					left: 88%;
+				}
+				.loginBox .input-text {
+					width: 217px !important;
 				}
 			}
 		</style>
@@ -39,74 +63,46 @@
 		<input type="hidden" id="TenantId" name="TenantId" value="" />
 		<div class="header"></div>
 		<div class="loginWraper">
+			<div class="logo"></div>
 			<div id="loginform" class="loginBox">
-				<form class="form form-horizontal" action="index.html" method="post">
+				<div class="form form-horizontal">
+				<!--<form class="form form-horizontal" action="#" method="post">-->
 					<div class="row cl">
 						<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
 						<div class="formControls col-xs-8">
-							<input id="uNumber" name="uNumber" type="text" placeholder="警号" class="input-text size-L">
+							<input id="" name="" type="text" placeholder="警号" class="input-text size-L">
 						</div>
 					</div>
 					<div class="row cl">
 						<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
 						<div class="formControls col-xs-8">
-							<input id="loginPassword" name="loginPassword" type="password" placeholder="密码" class="input-text size-L">
+							<input id="" name="" type="password" placeholder="密码" class="input-text size-L">
 						</div>
 					</div>
 					<div class="row cl">
 						<div class="formControls col-xs-8 col-xs-offset-3">
 							<label for="online">
-           						<input type="checkbox" name="online" id="online" value="">
-          						 使我保持登录状态
-							</label>
+            			<input type="checkbox" name="online" id="online" value="">
+            		使我保持登录状态</label>
 						</div>
 					</div>
 					<div class="row cl">
 						<div class="formControls col-xs-8 col-xs-offset-3">
-							<input id="loginBtn" name="loginBtn" type="button" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
+							<input id="loginBtn" name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
 							<input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
 						</div>
 					</div>
-				</form>
+				<!--</form>-->
+				</div>
 			</div>
 		</div>
 		<div class="footer">Copyright</div>
 		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
 		<script type="text/javascript">
-			$("#loginBtn").on("click", function() {
-				var uNumber = $("#uNumber").val();
-				var loginPassword = $("#loginPassword").val();
-				$.ajax({
-					type: "post",
-					url: "http://localhost:8080/forestoa/user/login",
-					data: {
-						"uNumber": uNumber,
-						"loginPassword": loginPassword
-					},
-
-					success: function(data) {
-						// wsCache.touch("currUser",900);
-						//alert(data.success);
-						if(data.success == false) {
-							alert("用户或密码输入错误！");
-						};
-						if(data.success == true) {
-							// alert("登录成功！");
-							location.href = 'index.html';
-						}
-						//confirm2()
-					},
-					error: function() {}
-				});
-
+			$('#loginBtn').click(function() {
+				location.href = 'index.html';
 			});
-			
-			var hW = $(window).width();
-			var hH = $(window).height();
-			console.log(hW);
-			console.log(hH);
-			$('.loginWraper').css('background-size','100% 100%');
 		</script>
 	</body>
 
