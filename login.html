@@ -34,7 +34,7 @@
 			
 			@media only screen and (min-width: 1280px) and (max-width: 1366px) {
 				.logo {
-					top: 100px;
+					top: 16%;
 				}
 			}
 			
@@ -56,17 +56,22 @@
 					width: 217px !important;
 				}
 			}
+			
+			@media (max-width: 767px) {
+				.form-horizontal .form-label {
+					 text-align: right; 
+				}
+			}
 		</style>
 	</head>
 
 	<body style="color:#ffffff;">
-		<input type="hidden" id="TenantId" name="TenantId" value="" />
 		<div class="header"></div>
 		<div class="loginWraper">
 			<div class="logo"></div>
 			<div id="loginform" class="loginBox">
 				<div class="form form-horizontal">
-				<!--<form class="form form-horizontal" action="#" method="post">-->
+					<!--<form class="form form-horizontal" action="#" method="post">-->
 					<div class="row cl">
 						<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
 						<div class="formControls col-xs-8">
@@ -92,16 +97,23 @@
 							<input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
 						</div>
 					</div>
-				<!--</form>-->
+					<!--</form>-->
 				</div>
 			</div>
 		</div>
 		<div class="footer">Copyright</div>
 		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
+		<script type="text/javascript" src="js/jquery.ez-bg-resize.js"></script>
 		<script type="text/javascript">
 			$('#loginBtn').click(function() {
 				location.href = 'index.html';
+			});
+
+			$("body").ezBgResize({
+				img: "static/h-ui.admin/images/admin-login-bg.jpg",
+				opacity: 1,
+				center: true
 			});
 		</script>
 	</body>
