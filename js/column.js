@@ -129,33 +129,16 @@ window.onload = function() {
 };
 
 /*--------------------------------*/
-function resizeBody() {
-	var bodyH = $(window).height();
-	var headerH = $('#tjwq_header').height();
-	var navH = $('#nav').height();
-	
-	var hw = $(window).width();
-	var lWrap = $('#tjwqBtn').width();
-	$('#tjwqMainframe').css('width', (hw - lWrap -2 ));
-	
-	//console.log(bodyH);
-	//console.log(bodyH -headerH -navH );
-	$('.pagewrap').css('height', (bodyH - headerH - navH));
-	$('#tjwqMainframe').css('height', (bodyH - headerH - navH));
-	$('#tjwqMainframe_bodybox').css('height', (bodyH - headerH - navH));
-};
-resizeBody();
-
 /*左侧菜单列表收缩、展开*/
 function fnDisplayNavBar(obj) {
+	
 	var hw = $(window).width();
 	var lWrap = $('#tjwqBtn').width();
-	
 	if($(obj).hasClass("open")) {
 		$(obj).removeClass("open");
 		$("body").removeClass("big-page");
 		$('#tjwqBtn').show();
-		$('#tjwqMainframe').css('width', (hw - lWrap -2));
+		$('#tjwqMainframe').css('width', '85%');
 	} else {
 		$(obj).addClass("open");
 		$("body").addClass("big-page");
@@ -164,29 +147,38 @@ function fnDisplayNavBar(obj) {
 	}
 };
 /*监听窗口大小、设置右侧容器宽度*/
-/*function resizeWindow() {
+function resizeWindow() {
 	var hw = $(window).width();
 	var lWrap = $('#tjwqBtn').width();
 	$('#tjwqMainframe').css('width', (hw - lWrap - 2));
 };
 resizeWindow();
-*/
 
-/*function resizeWarp() {
+
+function resizeBody() {
+	var bodyH = $(window).height();
+	var headerH = $('#tjwq_header').height();
+	var navH = $('#nav').height();
+	//console.log(bodyH);
+	//console.log(bodyH -headerH -navH );
+	$('.pagewrap').css('height', (bodyH - headerH - navH));
+	$('#tjwqMainframe_bodybox').css('height', (bodyH - headerH - navH));
+};
+resizeBody();
+
+function resizeWarp() {
 	$('.pngfix').addClass("open");
 	$("body").addClass("big-page");
 	$('#tjwqBtn').hide();
 	$('#tjwqMainframe').css('width', '100%')
 }
 resizeWarp();
-*/
+
 $(window).resize(function() {
+	resizeWindow();
 	resizeBody();
-	//resizeWindow();
 	resizeWarp();
 });
-
-/***/
 $("#ui-toggle-1").click(function() {
 	$("#ui-content-1").fadeToggle(1000);
 });
@@ -199,3 +191,5 @@ $("#ui-toggle-3").click(function() {
 $("#ui-toggle-4").click(function() {
 	$("#ui-content-4").fadeToggle(1000);
 });
+
+

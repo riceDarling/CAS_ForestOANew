@@ -58,7 +58,8 @@ body{
 
 .cl1 {
 	border: 1px solid #96c2f1;
-	background: #eff7ff
+	background: #eff7ff;
+
 }
 
 .cl2 {
@@ -99,7 +100,7 @@ body{
 
 .lanren {
 	margin: 12px auto;
-	width: 120px;
+	width: 140px;
 	height: 80px;
 	background: white;
 	border-radius: 10px;
@@ -111,6 +112,7 @@ body{
 .lanren span{
 	display: block;
 	text-align: center;
+	color: #666666;
 }
 .lanren .spanText1{
 	

@@ -34,8 +34,7 @@
 				bottom: 0;
 				width: 100%;
 				height: 100%;
-				/*padding-top: 180px;*/
-				padding-top: 155px;
+				padding-top: 180px;
 				padding-left: 100px;
 				padding-right: 100px;
 			}
@@ -54,7 +53,8 @@
 		<div id="nav" style="z-index: 12;">
 			<span style="margin-left:16px;">欢迎登陆本系统！您当前的位置为：首页</span>
 			<div style="float:right;">
-				<span style="margin-right:40px;">您好！超级管理员</span>
+				<span style="margin-right:14px;">您好！超级管理员</span>
+				<a onclick="editPwd('修改密码','change-password.html','600','300')" href="javascript:;" style="margin-right:16px;">[修改密码]</a>
 				<a href="login.html" style="margin-right:16px;">[注销]</a>
 			</div>
 		</div>
@@ -62,7 +62,7 @@
 			<div style="width:100%;height:100%;position:relative;">
 				<div id="listBtn" style="position:absolute;width:100%;height:100%;">
 					<div class="btngrp">
-						<a href="Work-task.html">
+						<!--<a href="Work-task.html">
 							<div class="target-button">
 								<div style="position: relative;">
 									<span class="badge badge-danger" style="position: absolute; top: 0px;left: 50px;z-index: 999;">15</span>
@@ -72,14 +72,18 @@
 									<p>我的任务</p>
 								</div>
 							</div>
-						</a>
+						</a>-->
 						<a href="File-handle.html">
 							<div class="target-button">
-								<div>
+								<!--<div>
 									<img src="images/index/8.png" width="70px" height="70px" />
+								</div>-->
+								<div style="position: relative;">
+									<span class="badge badge-danger" style="position: absolute; top: 0px;left: 50px;z-index: 999;">15</span>
+									<img src="images/index/4.png" width="70px" height="70px" />
 								</div>
 								<div class="mt-10">
-									<p>公文办理</p>
+									<p>公文查询</p>
 								</div>
 							</div>
 						</a>
@@ -143,7 +147,7 @@
 								</div>
 							</div>
 						</a>
-						<a href="File-document-admin.html">
+						<!--<a href="File-document-admin.html">
 							<div class="target-button">
 								<div>
 									<img src="images/index/15.png" width="70px" height="70px" />
@@ -152,8 +156,8 @@
 									<p>公文管理</p>
 								</div>
 							</div>
-						</a>
-						<a href="File-document-searchInfo.html">
+						</a>-->
+						<!--<a href="File-document-searchInfo.html">
 							<div class="target-button">
 								<div>
 									<img src="images/index/4.png" width="70px" height="70px" />
@@ -162,7 +166,7 @@
 									<p>公文搜索</p>
 								</div>
 							</div>
-						</a>
+						</a>-->
 						<a class="otherManageBtn" href="Javascript:;">
 							<div class="target-button">
 								<div>
@@ -213,7 +217,7 @@
 								</div>
 							</div>
 						</a>
-						<a href="unitManagement.html">
+						<!--<a href="unitManagement.html">
 							<div class="target-button">
 								<div>
 									<img src="images/index/14.png" width="70px" height="70px" />
@@ -222,23 +226,39 @@
 									<p>收发单位管理</p>
 								</div>
 							</div>
-						</a>
+						</a>-->
 						<div style="clear: both;"></div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
+
 		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
 		<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
 		<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
+		<script type="text/javascript" src="js/column.js"></script>
 		<script type="text/javascript">
 			$('.otherManageBtn').click(function() {
 				layer.msg('功能正在完善中...', {
 					icon: 5
 				});
 			});
+			/*修改*/
+			/*function editPwd(title, url, w, h) {
+				layer_show(title, url, w, h);
+			}*/
+			/*修改*/
+			function editPwd(title, url, id) {
+				var index = layer.open({
+					type: 2,
+					title: title,
+					maxmin: true,
+					area: ['600px', '300px'],
+					content: url
+				});
+				layer.full(index);
+			};
 		</script>
 	</body>
 

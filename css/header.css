@@ -12,7 +12,8 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	background: #fff 
+	background: #fff;
+	overflow: auto;
 }
 
 body,
@@ -118,9 +119,11 @@ em {
 	color: #0196E3;
 	cursor: pointer;
 }
-.pagewrap{
+
+.pagewrap {
 	margin-top: 0 !important;
 }
+
 .tjwqtitle {
 	height: 35px;
 	background: #458fef url(../images/index/function.png) no-repeat 10px center;
@@ -178,10 +181,10 @@ em {
 }
 
 #tjwqBtn {
-	width: 15%;
+	width: 15% !important;
 	height: 100%;
 	float: left;
-	background:#f4f4f4;
+	background: #f4f4f4;
 	/*border-right: 1px solid #d0d0d0;*/
 }
 
@@ -212,9 +215,11 @@ em {
 	width: 100%;
 	height: 100% !important;
 }
-.pagewrap{
-	background:#fff !important;
+
+.pagewrap {
+	background: #fff !important;
 }
+
 .myslider {
 	width: 60%;
 	height: 70px;
@@ -308,6 +313,14 @@ em {
 }
 
 .dislpayArrow {
-	left: 200px;
+	left: 15%;
 	z-index: 99999;
 }
+
+/*#addsendfile_wrapper .dataTables_scrollHeadInner{
+	width: 100% !important;
+}
+#addsendfile_wrapper .table{
+	width: 100% !important;
+}
+*/

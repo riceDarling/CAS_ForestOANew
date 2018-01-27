@@ -39,19 +39,34 @@
 						<option value="2">签章</option>
 					</select>
 				</span> -->
-				<lable>公文标题:</lable>
-				<input type="text" name="" id="" placeholder="标题名称" style="width:150px" class="input-text">
+				<lable>标题:</lable>
+				<input type="text" name="" id="" placeholder="标题名称" style="width:200px" class="input-text">
+				<lable>文号:</lable>
+				<input type="text" name="" id="" placeholder="请输入发文号..." style="width:120px" class="input-text">
+				<label>发文部门:</label>
 				<span class="select-box inline">
 					<select name="" class="select">
-						<option value="0">请选择公文类型</option>
-						<option value="1">上行文</option>
-						<option value="2">下行文</option>
+						<option value="0">所有部门</option>
+						<option value="1">政治部</option>
+						<option value="2">刑侦部</option>
+						<option value="3">综合科</option>
+						<option value="4">综合科</option>
+						<option value="5">法制科</option>
+						<option value="6">纪检督察科</option>
+						<option value="7">装备科</option>
+						<option value="8">信息通信科</option>
+						<option value="9">林科院警务区</option>
 					</select>
 				</span>
-				<lable>发文号:</lable>
-				<input type="text" name="" id="" placeholder="请输入发文号..." style="width:100px" class="input-text">
-				<lable>发文部门:</lable>
-				<input type="text" name="" id="" placeholder="请输入发文部门..." style="width:120px" class="input-text">
+				<label>状态:</label>
+				<span class="select-box inline">
+					<select name="" class="select">
+						<option value="0">请选择</option>
+						<option value="1">待办</option>
+						<option value="2">已办</option>
+						<option value="3">回退</option>
+					</select>
+				</span>
 				日期范围：
 				<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" style="width:120px;"> -
 				<input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="input-text Wdate" style="width:120px;">
@@ -61,27 +76,30 @@
 				<table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
 					<thead>
 						<tr class="text-c">
-							<th width="120">公文类型</th>
+							<th width="40">序号</th>
 							<th width="120">公文标题</th>
-							<th width="120">发文号</th>
-							<th width="120">来文单位</th>
+							<th width="120">文号</th>
+							<th width="120">科室</th>
+							<th width="60">时间</th>
 							<th width="60">状态</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="text-c" ondblclick="product_show('查看','documents-details.html','10001')">
-							<td>上行文 </td>
+						<tr class="text-c">
+							<td>1 </td>
 							<td>关于XXXX工作的开展</td>
 							<td>2018110</td>
 							<td>刑侦</td>
-							<td class="td-status"><span class="label label-success radius">已办理</span></td>
+							<td>2017-1-19</td>
+							<th>待办</th>
 						</tr>
-						<tr class="text-c" ondblclick="product_show('查看','documents-details.html','10001')">
-							<td>下行文 </td>
+						<tr class="text-c">
+							<td>2</td>
 							<td>关于XXXXX工作的验收</td>
 							<td>2018111</td>
 							<td>刑侦</td>
-							<td class="td-status"><span class="label label-success radius">未办理</span></td>
+							<td>2017-1-18</td>
+							<th>已办</th>
 						</tr>
 					</tbody>
 				</table>
