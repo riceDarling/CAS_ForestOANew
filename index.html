@@ -250,11 +250,10 @@
 			}*/
 			/*修改*/
 			function editPwd(title, url, id) {
-				var index = layer.open({
+				layer.open({
 					type: 2,
-					title: title,
-					maxmin: true,
-					area: ['600px', '300px'],
+					title:title,
+					area: ['600px', '300px'], //宽高
 					content: url
 				});
 				layer.full(index);

@@ -176,13 +176,13 @@
 				<div class="tjwqtitle">
 					考勤管理
 				</div>
-				<div class="listbtnz">
+				<div class="listbtnz on_xk tjwqActive">
 					<b></b>
-					<div framehref>值班表</div>
+					<div framehref>考核表</div>
 				</div>
 				<div class="listbtnz">
 					<b></b>
-					<div framehref>考核表</div>
+					<div id="remindBtn" framehref>值班表</div>
 				</div>
 			</div>
 			<div id="tjwqMainframe">
@@ -213,6 +213,25 @@
 		</script>
 		<script type="text/javascript" src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 		<script type="text/javascript" src="js/column.js"></script>
+
+		<script>
+			$('#remindBtn').click(function() {
+				//自定页
+				/*layer.open({
+					type: 1,
+					skin: 'layui-layer-demo', //样式类名
+					closeBtn: 0, //不显示关闭按钮
+					anim: 2,
+					shadeClose: true, //开启遮罩关闭
+					content: text();
+				});*/
+				layer.msg('功能正在完善中...', {
+					shade:0.3,
+					icon: 5
+				});
+
+			})
+		</script>
 	</body>
 
 </html>

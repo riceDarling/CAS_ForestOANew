@@ -60,7 +60,7 @@ var linkjump = {
 	"简报-发文管理": 'File-briefing-handle-send.html',
 	"简报-收文管理": 'File-briefing-handle-receive.html',
 	"公文管理": 'File-document-manager.html',
-	"公文搜索": 'File-document-search.html',
+	"我的公文": 'File-document-search.html',
 	"我的任务": 'Work-myTask.html',
 	"权限管理": 'System-power.html',
 	"组织管理": 'System-organization.html',
@@ -72,6 +72,7 @@ var linkjump = {
 	"工作计划": 'Work-plan.html',
 	"通知通告": 'Work-bulletin.html',
 	"收发单位管理": 'unit-file-management.html',
+	"回退统计":'Statistics-fallback.html'
 
 }
 $(document).on("click", "[frameHref]", function() {
@@ -132,8 +133,8 @@ window.onload = function() {
 /*左侧菜单列表收缩、展开*/
 function fnDisplayNavBar(obj) {
 	
-	var hw = $(window).width();
-	var lWrap = $('#tjwqBtn').width();
+	//var hw = $(window).width();
+	//var lWrap = $('#tjwqBtn').width();
 	if($(obj).hasClass("open")) {
 		$(obj).removeClass("open");
 		$("body").removeClass("big-page");
@@ -152,7 +153,7 @@ function resizeWindow() {
 	var lWrap = $('#tjwqBtn').width();
 	$('#tjwqMainframe').css('width', (hw - lWrap - 2));
 };
-resizeWindow();
+//resizeWindow();
 
 
 function resizeBody() {
@@ -175,7 +176,7 @@ function resizeWarp() {
 resizeWarp();
 
 $(window).resize(function() {
-	resizeWindow();
+	//resizeWindow();
 	resizeBody();
 	resizeWarp();
 });
